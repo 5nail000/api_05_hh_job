@@ -73,10 +73,10 @@ def get_all_predictions_superjob(all_jobs):
         all_vacancies = []
 
         while more:
-            get_page = get_superJob_page(lang, page)
-            [all_vacancies.append(item) for item in get_page[0]]
-            more = get_page[1]
-            total += get_page[2]
+            page_data = get_superJob_page(lang, page)
+            [all_vacancies.append(item) for item in page_data[0]]
+            more = page_data[1]
+            total += page_data[2]
 
         payments = predict_rub_salary_for_superJob(all_vacancies)
 
