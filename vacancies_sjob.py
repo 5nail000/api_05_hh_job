@@ -27,11 +27,11 @@ def get_superJob_page(vacancy, page=0):
 
     response = requests.get(host, headers=headers, params=params)
     response.raise_for_status()
-    response = response.json()
+    response_json = response.json()
 
-    all_vacancies = response['objects']
-    more = response['more']
-    total = response['total']
+    all_vacancies = response_json['objects']
+    more = response_json['more']
+    total = response_json['total']
 
     return [all_vacancies, more, total]
 
