@@ -40,23 +40,23 @@ def predict_rub_salary(vacancy, quantity):
             'clusters': True
             }
         response = send_request('https://api.hh.ru/vacancies', param).json()
-        for item in response['items']:
+        for single_vacancy in response['items']:
 
-            if item['salary'] is None:
+            if single_vacancy['salary'] is None:
                 continue
 
-            if item['salary']['currency'] != 'RUR':
+            if single_vacancy['salary']['currency'] != 'RUR':
                 continue
 
-            if item['salary']['from'] is None:
-                salary_all.append(item['salary']['to'] * 0.8)
+            if single_vacancy['salary']['from'] is None:
+                salary_all.append(single_vacancy['salary']['to'] * 0.8)
 
-            if item['salary']['to'] is None:
-                salary_all.append(item['salary']['from'] * 1.2)
+            if single_vacancy['salary']['to'] is None:
+                salary_all.append(single_vacancy['salary']['from'] * 1.2)
 
-            if item['salary']['to'] and item['salary']['from']:
+            if single_vacancy['salary']['to'] and single_vacancy['salary']['from']:
                 salary_all.append(
-                    (item['salary']['to'] + item['salary']['from'])/2
+                    (single_vacancy['salary']['to'] + single_vacancy['salary']['from'])/2
                     )
     return salary_all
 

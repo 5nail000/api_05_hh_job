@@ -41,10 +41,10 @@ def predict_rub_salary_for_superJob(all_vacancies):
     payments = []
     processing_filter = 100
 
-    for item in all_vacancies:
-        currency = item['currency']  # rub
-        payment_from = item['payment_from']
-        payment_to = item['payment_to']
+    for single_vacancy in all_vacancies:
+        currency = single_vacancy['currency']  # rub
+        payment_from = single_vacancy['payment_from']
+        payment_to = single_vacancy['payment_to']
 
         if currency != 'rub':
             continue

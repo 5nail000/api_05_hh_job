@@ -5,16 +5,16 @@ from vacancies_sjob import get_all_predictions_superjob
 
 def draw_table(all_predictions, title=''):
     table_header = []
-    for x_item in all_predictions:
-        for y_item in all_predictions[x_item]:
-            table_header.append(y_item)
+    for vacancy in all_predictions:
+        for vacancy_data in all_predictions[vacancy]:
+            table_header.append(vacancy_data)
         break
 
     table_data = [table_header]
-    for x_item in all_predictions:
+    for vacancy in all_predictions:
         new_row = []
-        for y_item in all_predictions[x_item]:
-            new_row.append(all_predictions[x_item][y_item])
+        for vacancy_data in all_predictions[vacancy]:
+            new_row.append(all_predictions[vacancy][vacancy_data])
 
         table_data.append(new_row)
 
