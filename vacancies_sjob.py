@@ -84,11 +84,13 @@ def get_all_predictions_superjob(all_jobs):
         if not payments:
             continue
 
-        all_predictions.update({lang: {
-            'Наименование': lang,
-            'Средняя оплата': int(sum(payments)/len(payments)),
-            'Всего вакансий': total,
-            'Кол-во обработанных': len(payments)
-            }})
+        all_predictions.update({
+            lang: {
+                'Наименование': lang,
+                'Средняя оплата': int(sum(payments)/len(payments)),
+                'Всего вакансий': total,
+                'Кол-во обработанных': len(payments)
+                }
+            })
 
     return all_predictions
