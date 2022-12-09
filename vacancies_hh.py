@@ -70,7 +70,7 @@ def get_all_predictions_hh(all_jobs):
         vacancy_solver = sum(vacancy_all_salaries)/len(vacancy_all_salaries)
         vacancy_average_salary = 1000 * round(vacancy_solver/1000)
         vacancies_processed = len(vacancy_all_salaries)
-        current_info = {
+        vacancy_data = {
             language: {
                 'Наименование': language,
                 'Средняя оплата': vacancy_average_salary,
@@ -78,6 +78,6 @@ def get_all_predictions_hh(all_jobs):
                 'Кол-во обработанных': vacancies_processed
                 }
             }
-        vacancies.update(current_info)
+        vacancies.update(vacancy_data)
 
     return vacancies
