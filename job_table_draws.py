@@ -26,11 +26,11 @@ if __name__ == '__main__':
 
     languages_10top = [
         'JavaScript', 'Java', 'Python', 'Ruby', 'PHP',
-        'C++', 'CSS', 'C#', 'C', 'Go'
+        # 'C++', 'CSS', 'C#', 'C', 'Go'
         ]
 
-    all_predictions = get_all_predictions_superjob(languages_10top)
-    print(draw_table(all_predictions, ' SuperJob.ru (Moscow) '))
+    # all_predictions = get_all_predictions_superjob(languages_10top)
+    # print(draw_table(all_predictions, ' SuperJob.ru (Moscow) '))
 
     all_predictions = get_all_predictions_hh(languages_10top)
     print(draw_table(all_predictions, ' HeadHunter.ru (Moscow) '))
