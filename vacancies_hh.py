@@ -51,7 +51,7 @@ def predict_rub_salary(vacancy):
         if page == total_pages or page == 19:
             more = False
         page += 1
-        True
+
     return [all_salaries, quantity]
 
 
@@ -65,14 +65,12 @@ def get_all_predictions_hh(all_jobs):
             vacancy_solver = sum(all_salaries)/len(all_salaries)
         vacancy_average_salary = 1000 * round(vacancy_solver/1000)
         vacancies_processed = len(all_salaries)
-        vacancy_data = {
-            language: {
-                'Наименование': language,
-                'Средняя оплата': vacancy_average_salary,
-                'Всего вакансий': vacancies_quantity,
-                'Кол-во обработанных': vacancies_processed
-                }
+
+        vacancies[language] = {
+            'Наименование': language,
+            'Средняя оплата': vacancy_average_salary,
+            'Всего вакансий': vacancies_quantity,
+            'Кол-во обработанных': vacancies_processed
             }
-        vacancies.update(vacancy_data)
 
     return vacancies
