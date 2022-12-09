@@ -4,10 +4,13 @@ import requests
 from dotenv import load_dotenv
 
 
+load_dotenv()
+token = os.getenv('SUPERJOB_SECRET_KEY')
+
+
 def get_superJob_page(vacancy, page=0):
 
-    load_dotenv()
-    token = os.getenv('SUPERJOB_SECRET_KEY')
+    global token
 
     host = 'https://api.superjob.ru/2.0/vacancies/'
     headers = {'X-Api-App-Id': token}
