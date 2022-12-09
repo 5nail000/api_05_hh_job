@@ -81,7 +81,7 @@ def get_all_predictions_superjob(all_jobs):
 
         payments = predict_rub_salary_for_superJob(all_vacancies)
 
-        if len(payments) < 1:
+        if not payments:
             continue
 
         all_predictions.update({lang: {
