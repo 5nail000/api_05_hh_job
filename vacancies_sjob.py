@@ -49,11 +49,11 @@ def predict_rub_salary_for_superJob(all_vacancies):
         if currency != 'rub':
             continue
 
-        if payment_to == 0:
+        if payment_to < 1:
             payment = payment_from * 1.2
             payment_to = False
 
-        if payment_from == 0:
+        if payment_from < 1:
             payment = payment_to * 0.8
             payment_from = False
 
