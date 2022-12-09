@@ -19,8 +19,7 @@ def draw_table(all_predictions, title=''):
         table_data.append(new_row)
 
     table = SingleTable(table_data, title)
-    print()
-    print(table.table)
+    return table.table
 
 
 if __name__ == '__main__':
@@ -31,7 +30,7 @@ if __name__ == '__main__':
         ]
 
     all_predictions = get_all_predictions_superjob(languages_10top)
-    draw_table(all_predictions, ' SuperJob.ru (Moscow) ')
+    print(draw_table(all_predictions, ' SuperJob.ru (Moscow) '))
 
     all_predictions = get_all_predictions_hh(languages_10top)
-    draw_table(all_predictions, ' HeadHunter.ru (Moscow) ')
+    print(draw_table(all_predictions, ' HeadHunter.ru (Moscow) '))

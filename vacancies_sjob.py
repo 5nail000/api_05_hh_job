@@ -71,6 +71,7 @@ def get_all_predictions_superjob(all_jobs):
     for lang in all_jobs:
         page = 0
         total = 0
+        avarage_salary = '- данных нет -'
         more = True
         all_vacancies = []
 
@@ -81,16 +82,16 @@ def get_all_predictions_superjob(all_jobs):
 
         payments = predict_rub_salary_for_superJob(all_vacancies)
 
-        if not payments:
-            continue
+        if payments:
+            avarage_salary = int(sum(payments)/len(payments))
 
         all_predictions.update({
             lang: {
                 'Наименование': lang,
-                'Средняя оплата': int(sum(payments)/len(payments)),
+                'Средняя оплата': avarage_salary,
                 'Всего вакансий': total,
                 'Кол-во обработанных': len(payments)
                 }
-            })
+                })
 
     return all_predictions
