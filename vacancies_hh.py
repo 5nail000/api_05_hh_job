@@ -26,16 +26,18 @@ def predict_rub_salary(vacancy, quantity):
         quantity = 2000
 
     salary_all = []
+    town = 113  # Moscow
+    speciality = 96  # Программист, разработчик
     pages = int(quantity/100)
     for page in range(pages):
         param = {
             'text': vacancy,
-            'clusters': True,
-            'describe_arguments': True,
-            'area': 113,  # Mosсow
-            'per_page': 100,
+            'area': town,
+            'professional_role': speciality,
             'page': page,
-            'professional_role': 96
+            'per_page': 100,
+            'describe_arguments': True,
+            'clusters': True
             }
         response = send_request('https://api.hh.ru/vacancies', param).json()
         for item in response['items']:

@@ -12,12 +12,15 @@ def get_superJob_page(vacancy, page=0):
 
     global token
 
+    category = 48  # Разработка, программирование
+    town = 4  # Moscow
+
     host = 'https://api.superjob.ru/2.0/vacancies/'
     headers = {'X-Api-App-Id': token}
     params = {
         'keyword': vacancy,
-        'catalogues': 48,
-        't': 4,
+        'catalogues': category,
+        't': town,
         'count': 100,
         'page': page
         }
@@ -56,8 +59,7 @@ def predict_rub_salary_for_superJob(all_vacancies):
         if payment_to and payment_from:
             payment = (payment_to + payment_from) / 2
 
-        if payment > 100:
-            payments.append(payment)
+        payments.append(payment)
 
     return payments
 
