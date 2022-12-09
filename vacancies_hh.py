@@ -32,16 +32,16 @@ def predict_rub_salary(vacancy):
 
         for single_vacancy in response['items']:
 
-            if single_vacancy['salary'] is None:
+            if not single_vacancy['salary']:
                 continue
 
             if single_vacancy['salary']['currency'] != 'RUR':
                 continue
 
-            if single_vacancy['salary']['from'] is None:
+            if not single_vacancy['salary']['from']:
                 all_salaries.append(single_vacancy['salary']['to'] * 0.8)
 
-            if single_vacancy['salary']['to'] is None:
+            if not single_vacancy['salary']['to']:
                 all_salaries.append(single_vacancy['salary']['from'] * 1.2)
 
             if single_vacancy['salary']['to'] and single_vacancy['salary']['from']:
