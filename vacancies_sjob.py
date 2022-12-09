@@ -27,11 +27,11 @@ def get_superJob_page(vacancy, page=0):
 
     response = requests.get(host, headers=headers, params=params)
     response.raise_for_status()
-    response_json = response.json()
+    response = response.json()
 
-    all_vacancies = response_json['objects']
-    more = response_json['more']
-    total = response_json['total']
+    all_vacancies = response['objects']
+    more = response['more']
+    total = response['total']
 
     return [all_vacancies, more, total]
 
@@ -39,6 +39,7 @@ def get_superJob_page(vacancy, page=0):
 def predict_rub_salary_for_superJob(all_vacancies):
 
     payments = []
+    processing_filter = 100
 
     for item in all_vacancies:
         currency = item['currency']  # rub
@@ -59,7 +60,8 @@ def predict_rub_salary_for_superJob(all_vacancies):
         if payment_to and payment_from:
             payment = (payment_to + payment_from) / 2
 
-        payments.append(payment)
+        if payment > processing_filter:
+            payments.append(payment)
 
     return payments
 
@@ -73,10 +75,9 @@ def get_all_predictions_superjob(all_jobs):
         all_vacancies = []
 
         while more:
-            page_data = get_superJob_page(lang, page)
-            [all_vacancies.append(item) for item in page_data[0]]
-            more = page_data[1]
-            total += page_data[2]
+            [page_vacancies, more, page_total] = get_superJob_page(lang, page)
+            [all_vacancies.append(item) for item in page_vacancies]
+            total += page_total
 
         payments = predict_rub_salary_for_superJob(all_vacancies)
 
