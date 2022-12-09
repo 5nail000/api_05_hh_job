@@ -26,18 +26,18 @@ def get_superJob_page(vacancy, page=0):
     response.raise_for_status()
     response = response.json()
 
-    objects = response['objects']
+    all_vacancies = response['objects']
     more = response['more']
     total = response['total']
 
-    return [objects, more, total]
+    return [all_vacancies, more, total]
 
 
-def predict_rub_salary_for_superJob(objects):
+def predict_rub_salary_for_superJob(all_vacancies):
 
     payments = []
 
-    for item in objects:
+    for item in all_vacancies:
         currency = item['currency']  # rub
         payment_from = item['payment_from']
         payment_to = item['payment_to']
@@ -68,15 +68,15 @@ def get_all_predictions_superjob(all_jobs):
         page = 0
         total = 0
         more = True
-        objects = []
+        all_vacancies = []
 
         while more:
             get_page = get_superJob_page(lang, page)
-            [objects.append(item) for item in get_page[0]]
+            [all_vacancies.append(item) for item in get_page[0]]
             more = get_page[1]
             total += get_page[2]
 
-        payments = predict_rub_salary_for_superJob(objects)
+        payments = predict_rub_salary_for_superJob(all_vacancies)
 
         if len(payments) < 1:
             continue
