@@ -9,7 +9,7 @@ def send_request(url, params=None):
 
 def predict_rub_salary(vacancy):
 
-    salary_all = []
+    all_salaries = []
     town = 113  # Moscow
     speciality = 96  # Программист, разработчик
     per_page = 100
@@ -39,20 +39,20 @@ def predict_rub_salary(vacancy):
                 continue
 
             if single_vacancy['salary']['from'] is None:
-                salary_all.append(single_vacancy['salary']['to'] * 0.8)
+                all_salaries.append(single_vacancy['salary']['to'] * 0.8)
 
             if single_vacancy['salary']['to'] is None:
-                salary_all.append(single_vacancy['salary']['from'] * 1.2)
+                all_salaries.append(single_vacancy['salary']['from'] * 1.2)
 
             if single_vacancy['salary']['to'] and single_vacancy['salary']['from']:
-                salary_all.append(
+                all_salaries.append(
                     (single_vacancy['salary']['to'] + single_vacancy['salary']['from'])/2
                     )
         if page == total_pages or page == 19:
             more = False
         page += 1
         True
-    return [salary_all, quantity]
+    return [all_salaries, quantity]
 
 
 def get_all_predictions_hh(all_jobs):
