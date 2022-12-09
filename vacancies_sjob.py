@@ -85,13 +85,11 @@ def get_all_predictions_superjob(all_jobs):
         if payments:
             avarage_salary = int(sum(payments)/len(payments))
 
-        all_predictions.update({
-            lang: {
-                'Наименование': lang,
-                'Средняя оплата': avarage_salary,
-                'Всего вакансий': total,
-                'Кол-во обработанных': len(payments)
-                }
-                })
+        all_predictions[lang] = {
+            'Наименование': lang,
+            'Средняя оплата': avarage_salary,
+            'Всего вакансий': total,
+            'Кол-во обработанных': len(payments)
+            }
 
     return all_predictions
