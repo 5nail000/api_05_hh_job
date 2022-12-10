@@ -1,3 +1,6 @@
+import os
+
+from dotenv import load_dotenv
 from terminaltables import SingleTable
 from vacancies_hh import get_all_predictions_hh
 from vacancies_sjob import get_all_predictions_superjob
@@ -24,12 +27,15 @@ def draw_table(all_predictions, title=''):
 
 if __name__ == '__main__':
 
+    load_dotenv()
+    token_sjob = os.getenv('SUPERJOB_SECRET_KEY')
+
     languages_10top = [
         'JavaScript', 'Java', 'Python', 'Ruby', 'PHP',
         'C++', 'CSS', 'C#', 'C', 'Go'
         ]
 
-    all_predictions = get_all_predictions_superjob(languages_10top)
+    all_predictions = get_all_predictions_superjob(token_sjob, languages_10top)
     print(draw_table(all_predictions, ' SuperJob.ru (Moscow) '))
 
     all_predictions = get_all_predictions_hh(languages_10top)

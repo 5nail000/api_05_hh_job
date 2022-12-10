@@ -1,16 +1,7 @@
-import os
 import requests
 
-from dotenv import load_dotenv
 
-
-load_dotenv()
-token = os.getenv('SUPERJOB_SECRET_KEY')
-
-
-def get_superJob_page(vacancy, page=0):
-
-    global token
+def get_superJob_page(token, vacancy, page=0):
 
     category = 48  # Разработка, программирование
     town = 4  # Moscow
@@ -66,7 +57,7 @@ def predict_rub_salary_for_superJob(all_vacancies):
     return payments
 
 
-def get_all_predictions_superjob(all_jobs):
+def get_all_predictions_superjob(token, all_jobs):
     all_predictions = {}
     for lang in all_jobs:
         page = 0
@@ -76,7 +67,7 @@ def get_all_predictions_superjob(all_jobs):
         all_vacancies = []
 
         while more:
-            [page_vacancies, more, page_total] = get_superJob_page(lang, page)
+            [page_vacancies, more, page_total] = get_superJob_page(token, lang, page)
             [all_vacancies.append(item) for item in page_vacancies]
             total += page_total
 
