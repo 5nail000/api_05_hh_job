@@ -18,13 +18,13 @@ def get_superJob_page(token, vacancy, page=0):
 
     response = requests.get(host, headers=headers, params=params)
     response.raise_for_status()
-    response = response.json()
+    response_json = response.json()
 
-    all_vacancies = response['objects']
-    more = response['more']
-    total = response['total']
+    all_vacancies = response_json['objects']
+    more = response_json['more']
+    total = response_json['total']
 
-    return [all_vacancies, more, total]
+    return (all_vacancies, more, total)
 
 
 def predict_rub_salary_for_superJob(all_vacancies):
@@ -67,7 +67,7 @@ def get_all_predictions_superjob(token, all_jobs):
         all_vacancies = []
 
         while more:
-            [page_vacancies, more, page_total] = get_superJob_page(token, lang, page)
+            (page_vacancies, more, page_total) = get_superJob_page(token, lang, page)
             [all_vacancies.append(item) for item in page_vacancies]
             total += page_total
 
