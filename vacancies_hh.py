@@ -37,12 +37,12 @@ def predict_rub_salary(vacancy):
 
         response = requests.get('https://api.hh.ru/vacancies', params=param)
         response.raise_for_status()
-        response_json = response.json()
+        response_dict = response.json()
 
-        quantity = response_json['found']
+        quantity = response_dict['found']
         total_pages = int(quantity/per_page)
 
-        for single_vacancy in response_json['items']:
+        for single_vacancy in response_dict['items']:
 
             if not single_vacancy['salary']:
                 continue
