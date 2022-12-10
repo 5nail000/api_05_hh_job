@@ -34,7 +34,7 @@ def predict_rub_salary(vacancy):
                 'describe_arguments': True,
                 'clusters': True
                 }
-        
+
         response = requests.get('https://api.hh.ru/vacancies', params=param)
         response.raise_for_status()
         response_json = response.json()
