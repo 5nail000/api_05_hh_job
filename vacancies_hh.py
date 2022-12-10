@@ -69,7 +69,7 @@ def get_all_predictions_hh(all_jobs):
         all_salaries, vacancies_quantity = predict_rub_salary(language)
 
         vacancy_solver = 0
-        if len(all_salaries) > 0:
+        if all_salaries:
             vacancy_solver = sum(all_salaries)/len(all_salaries)
         vacancy_average_salary = 1000 * round(vacancy_solver/1000)
         vacancies_processed = len(all_salaries)
