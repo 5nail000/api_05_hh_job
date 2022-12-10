@@ -1,3 +1,4 @@
+
 def avarage_salary_solver(salary_from, salary_to):
 
     if not salary_from:
