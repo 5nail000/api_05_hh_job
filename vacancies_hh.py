@@ -66,7 +66,7 @@ def predict_rub_salary(vacancy):
 def get_all_predictions_hh(all_jobs):
     vacancies = {}
     for language in all_jobs:
-        (all_salaries, vacancies_quantity) = predict_rub_salary(language)
+        all_salaries, vacancies_quantity = predict_rub_salary(language)
 
         vacancy_solver = 0
         if len(all_salaries) > 0:
