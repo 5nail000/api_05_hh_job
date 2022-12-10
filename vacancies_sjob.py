@@ -73,7 +73,7 @@ def get_all_predictions_superjob(token, all_jobs):
         all_vacancies = []
 
         while more:
-            (page_vacancies, more, page_total) = get_superJob_page(token, lang, page)
+            page_vacancies, more, page_total = get_superJob_page(token, lang, page)
             [all_vacancies.extend([item]) for item in page_vacancies]
             total += page_total
 
