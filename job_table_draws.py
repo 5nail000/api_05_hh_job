@@ -2,6 +2,7 @@ import os
 
 from dotenv import load_dotenv
 from terminaltables import SingleTable
+
 from vacancies_hh import get_all_predictions_hh
 from vacancies_sjob import get_all_predictions_superjob
 
