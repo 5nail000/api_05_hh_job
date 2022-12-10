@@ -27,6 +27,21 @@ def get_superJob_page(token, vacancy, page=0):
     return (all_vacancies, more, total)
 
 
+def avarage_payment_solver(payment_from, payment_to):
+    if not payment_to:
+        payment = payment_from * 1.2
+        payment_to = False
+
+    if not payment_from:
+        payment = payment_to * 0.8
+        payment_from = False
+
+    if payment_to and payment_from:
+        payment = (payment_to + payment_from) / 2
+
+    return payment
+
+
 def predict_rub_salary_for_superJob(all_vacancies):
 
     payments = []
@@ -40,16 +55,7 @@ def predict_rub_salary_for_superJob(all_vacancies):
         if currency != 'rub':
             continue
 
-        if payment_to < 1:
-            payment = payment_from * 1.2
-            payment_to = False
-
-        if payment_from < 1:
-            payment = payment_to * 0.8
-            payment_from = False
-
-        if payment_to and payment_from:
-            payment = (payment_to + payment_from) / 2
+        payment = avarage_payment_solver(payment_from, payment_to)
 
         if payment > processing_filter:
             payments.append(payment)
