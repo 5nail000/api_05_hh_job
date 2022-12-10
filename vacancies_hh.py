@@ -1,10 +1,18 @@
 import requests
 
 
-def send_request(url, params=None):
-    response = requests.get(url, params=params)
-    response.raise_for_status()
-    return response
+def avarage_salary_solver(salary_from, salary_to):
+
+    if not salary_from:
+        avarage_salary = salary_to * 0.8
+
+    if not salary_to:
+        avarage_salary = salary_from * 1.2
+
+    if salary_to and salary_from:
+        avarage_salary = (salary_to + salary_from)/2
+
+    return avarage_salary
 
 
 def predict_rub_salary(vacancy):
@@ -26,11 +34,15 @@ def predict_rub_salary(vacancy):
                 'describe_arguments': True,
                 'clusters': True
                 }
-        response = send_request('https://api.hh.ru/vacancies', param).json()
-        quantity = response['found']
+        
+        response = requests.get('https://api.hh.ru/vacancies', params=param)
+        response.raise_for_status()
+        response_json = response.json()
+
+        quantity = response_json['found']
         total_pages = int(quantity/per_page)
 
-        for single_vacancy in response['items']:
+        for single_vacancy in response_json['items']:
 
             if not single_vacancy['salary']:
                 continue
@@ -38,16 +50,12 @@ def predict_rub_salary(vacancy):
             if single_vacancy['salary']['currency'] != 'RUR':
                 continue
 
-            if not single_vacancy['salary']['from']:
-                all_salaries.append(single_vacancy['salary']['to'] * 0.8)
+            avarage_salary = avarage_salary_solver(
+                                            single_vacancy['salary']['from'],
+                                            single_vacancy['salary']['to']
+                                            )
+            all_salaries.append(avarage_salary)
 
-            if not single_vacancy['salary']['to']:
-                all_salaries.append(single_vacancy['salary']['from'] * 1.2)
-
-            if single_vacancy['salary']['to'] and single_vacancy['salary']['from']:
-                all_salaries.append(
-                    (single_vacancy['salary']['to'] + single_vacancy['salary']['from'])/2
-                    )
         if page == total_pages or page == 19:
             more = False
         page += 1
