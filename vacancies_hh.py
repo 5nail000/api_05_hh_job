@@ -1,6 +1,6 @@
 import requests
 
-from common_func import avarage_salary_solver
+from common_func import calculate_avarage_salary
 
 
 def predict_rub_salary(vacancy):
@@ -38,7 +38,7 @@ def predict_rub_salary(vacancy):
             if single_vacancy['salary']['currency'] != 'RUR':
                 continue
 
-            avarage_salary = avarage_salary_solver(
+            avarage_salary = calculate_avarage_salary(
                                             single_vacancy['salary']['from'],
                                             single_vacancy['salary']['to']
                                             )

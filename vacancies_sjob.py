@@ -1,6 +1,6 @@
 import requests
 
-from common_func import avarage_salary_solver
+from common_func import calculate_avarage_salary
 
 
 def get_superJob_page(token, vacancy, page=0):
@@ -42,7 +42,7 @@ def predict_rub_salary_for_superJob(all_vacancies):
         if currency != 'rub':
             continue
 
-        payment = avarage_salary_solver(payment_from, payment_to)
+        payment = calculate_avarage_salary(payment_from, payment_to)
 
         if payment > processing_filter:
             payments.append(payment)

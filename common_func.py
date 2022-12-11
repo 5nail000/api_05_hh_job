@@ -1,5 +1,5 @@
 
-def avarage_salary_solver(salary_from, salary_to):
+def calculate_avarage_salary(salary_from, salary_to):
 
     if not salary_from:
         avarage_salary = salary_to * 0.8
