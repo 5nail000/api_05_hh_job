@@ -61,7 +61,7 @@ def get_all_predictions_superjob(token, all_jobs):
 
         while more:
             page_vacancies, more, page_total = get_superJob_page(token, lang, page)
-            all_vacancies.extend([*page_vacancies])
+            all_vacancies.extend(page_vacancies)
             total += page_total
 
         payments = predict_rub_salary_for_superJob(all_vacancies)
